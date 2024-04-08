@@ -8,7 +8,7 @@ const Home = () => {
 
     const [resultadoBusca, setResultadoBusca] = useState("")
     const {currentUser} = useSelector(rootReducer => rootReducer.dataReducer) 
-    console.log(currentUser);
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -55,7 +55,7 @@ const Home = () => {
                         <Styled.Input placeholder="Pesquise aqui" />
                     </Styled.ContainerInput>
 
-                    <Styled.Button onClick={() => onClickBusca(resultadoBusca)}>Buscar</Styled.Button>
+                    <Styled.Button onClick={() => onClickBusca(navigate, resultadoBusca)}>Buscar</Styled.Button>
                 </Styled.Buscar>
             </Styled.Container>
        
