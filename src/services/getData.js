@@ -1,7 +1,7 @@
 import { BASE_URL } from "../constantes/url";
 import axios from "axios";
 
-export const getById = (id) => {
+export const getById = (resultadoBusca, setResultadoBuscaa) => {
     axios.get(`${BASE_URL}i=${id}`)
         .then((res) => {
             console.log(res.data)
@@ -10,18 +10,19 @@ export const getById = (id) => {
         })
 }
 
-export const getByTitle = (title) => {
-    axios.get(`${BASE_URL}t=${title}`)
+export const getByTitle = (resultadoBusca, setResultadoBusca) => {
+    axios.get(`${BASE_URL}&t=${resultadoBusca}`)
         .then((res) => {
-            let dadoFilme = res.data
-            return dadoFilme
+            console.log(resultadoBusca)
+            let teste = setResultadoBusca(res.data)
+            console.log(teste)
         }).catch((err) => {
             console.log(err.response)
         })
 }
 
-export const getByType = (type) => {
-    axios.get(`${BASE_URL}type=${type}`)
+export const getByType = (resultadoBusca, setResultadoBusca) => {
+    axios.get(`${BASE_URL}type=${resultadoBusca}`)
         .then((res) => {
             console.log(res.data)
         }).catch((err) => {

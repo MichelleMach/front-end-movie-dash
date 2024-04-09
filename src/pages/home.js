@@ -1,43 +1,39 @@
-import React, { useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux'
+import React, { useContext, useState } from 'react'
+// import {useSelector, useDispatch} from 'react-redux'
 import Lupa from "../assets/lupa.png"
 import { useNavigate } from 'react-router-dom'
 import * as Styled from "../styles/pages/home"
+import GlobalContext from '../global/globalContext';
 
 const Home = () => {
 
     const [resultadoBusca, setResultadoBusca] = useState("")
-    const {currentUser} = useSelector(rootReducer => rootReducer.dataReducer) 
+    const { states, setters } = useContext(GlobalContext)
+    // const {currentUser} = useSelector(rootReducer => rootReducer.dataReducer) 
     const navigate = useNavigate()
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     const onChangeBusca = (e) => {
         setResultadoBusca(e.target.value)
     }
 
-    const onClickBusca = (e) => {
-        dispatch({
-            type: 'todos/todoAdded',
-            payload: resultadoBusca,
-        })
-    }
-    
-
     const mostrarResultado = () => {
-        
-        // const dadosFilme = getByTitle(resultadoBusca)
 
         if (!resultadoBusca) {
-            // console.log("Filme ou série não identificado")
+            console.log("Não há nada para buscar. Digite as palavras-chaves e tente novamente")
         }
-        // if (resultadoBusca == ) {
-        //     console.log()
+
+        setters(resultadoBusca)
+        console.log(states)
+
+        // if (resultadoBusca = ) {
+        //     console.log(resultadoBusca)
+
         // }
 
     }
-    mostrarResultado()
-    
+
 
     return (
         <div>
@@ -55,11 +51,9 @@ const Home = () => {
                         <Styled.Input placeholder="Pesquise aqui" />
                     </Styled.ContainerInput>
 
-                    <Styled.Button onClick={() => onClickBusca(navigate, resultadoBusca)}>Buscar</Styled.Button>
+                    <Styled.Button onClick={() => mostrarResultado()}>Buscar</Styled.Button>
                 </Styled.Buscar>
             </Styled.Container>
-       
-            
         </div>
 
     )
