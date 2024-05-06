@@ -1,53 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './redux/root-reducer';
 import Header from './components/header/header';
-import Router from './router/router';
-import GlobalContext from './global/globalContext';
-import { BASE_URL } from "../src/constantes/url"
-import axios from "axios";
-import './App.css'
+import Router from './router/router'
 
-function App() {
+const store = createStore(rootReducer);
 
-  const [resultadoBusca, setResultadoBusca] = useState([])
+const App = () => {
 
-  useEffect((resultadoBusca, setResultadoBusca) => {
-
-    axios.get(`${BASE_URL}i=${resultadoBusca}`)
-      .then((res) => {
-        setResultadoBusca(res.data)
-      }).catch((err) => {
-        console.log(err.response)
-      })
-
-    axios.get(`${BASE_URL}t=${resultadoBusca}`)
-      .then((res) => {
-        let teste = setResultadoBusca(res.data)
-        console.log(teste)
-      }).catch((err) => {
-        console.log(err.response)
-      })
-
-    axios.get(`${BASE_URL}type=${resultadoBusca}`)
-      .then((res) => {
-        setResultadoBusca(res.data)
-      }).catch((err) => {
-        console.log(err.response)
-      })
-
-  }, [])
-
-  const states = { resultadoBusca }
-  const setters = { setResultadoBusca }
 
   return (
-    <div className="App">
-      <GlobalContext.Provider value={{ states, setters }}>
-        <Header />
-        <Router />
-      </GlobalContext.Provider>
-
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Header/>
+        <Router/>
+     
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
