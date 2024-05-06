@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux'
+import React, { useContext, useState } from 'react'
+// import {useSelector, useDispatch} from 'react-redux'
 import Lupa from "../assets/lupa.png"
 import * as Styled from "../styles/pages/home"
 import { type } from '@testing-library/user-event/dist/type';
@@ -39,8 +39,6 @@ const Home = () => {
                     <Styled.Button onClick={onClickBusca}>Buscar</Styled.Button>
                 </Styled.Buscar>
             </Styled.Container>
-       
-            
         </div>
 
     )
