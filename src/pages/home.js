@@ -1,15 +1,12 @@
 import React, { useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import Lupa from "../assets/lupa.png"
-import { useNavigate } from 'react-router-dom'
 import * as Styled from "../styles/pages/home"
+import { type } from '@testing-library/user-event/dist/type';
 
 const Home = () => {
 
     const [resultadoBusca, setResultadoBusca] = useState("")
-    const {currentUser} = useSelector(rootReducer => rootReducer.dataReducer) 
-    const navigate = useNavigate()
-
     const dispatch = useDispatch()
 
     const onChangeBusca = (e) => {
@@ -18,27 +15,11 @@ const Home = () => {
 
     const onClickBusca = (e) => {
         dispatch({
-            type: 'todos/todoAdded',
+            type: 'REALIZAR_BUSCA',
             payload: resultadoBusca,
         })
     }
     
-
-    const mostrarResultado = () => {
-        
-        // const dadosFilme = getByTitle(resultadoBusca)
-
-        if (!resultadoBusca) {
-            // console.log("Filme ou série não identificado")
-        }
-        // if (resultadoBusca == ) {
-        //     console.log()
-        // }
-
-    }
-    mostrarResultado()
-    
-
     return (
         <div>
             <Styled.Container>
@@ -55,7 +36,7 @@ const Home = () => {
                         <Styled.Input placeholder="Pesquise aqui" />
                     </Styled.ContainerInput>
 
-                    <Styled.Button onClick={() => onClickBusca(navigate, resultadoBusca)}>Buscar</Styled.Button>
+                    <Styled.Button onClick={onClickBusca}>Buscar</Styled.Button>
                 </Styled.Buscar>
             </Styled.Container>
        
