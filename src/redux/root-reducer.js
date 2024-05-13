@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import dataReducer from "./movie/reducer";
 
 const rootReducer = combineReducers({
-    data: dataReducer
+    dataReducer: dataReducer
 });
 
 export default rootReducer;
