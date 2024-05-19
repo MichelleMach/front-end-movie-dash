@@ -7,8 +7,8 @@ export default function Header() {
         <Styled.Header>
             <Styled.Logo>Filme&Series</Styled.Logo>
             <Styled.HeaderItens>
-                <Styled.HeaderItem>Filmes</Styled.HeaderItem>
-                <Styled.HeaderItem>Series</Styled.HeaderItem>
+                {/* <Styled.HeaderItem>Filmes</Styled.HeaderItem>
+                <Styled.HeaderItem>Series</Styled.HeaderItem> */}
             </Styled.HeaderItens>
         </Styled.Header>
     )

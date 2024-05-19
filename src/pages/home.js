@@ -2,35 +2,45 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Lupa from "../assets/lupa.png"
 import * as Styled from "../styles/pages/home"
-import  Movie from '../components/movie/movie'
+import { useNavigate } from 'react-router-dom'
+import { goToMoviePage } from '../router/coordenator'
+import { getByTitle, getById } from '../data/getData'
 
 
 const Home = () => {
 
     const [resultadoBusca, setResultadoBusca] = useState("")
+
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const onChangeBusca = (e) => {
         setResultadoBusca(e.target.value)
     }
 
-    const onClickBusca = (e) => {
+    const onClickBusca = async (e) => {
 
-        if (resultadoBusca.substr(0, 2) === "tt" ){
-            dispatch({
-                type: 'BUSCAR_ID',
-                payload: resultadoBusca,
-            })
-        }
+        dispatch({ type: 'FETCH_DATA_REQUEST' });
 
-        if (resultadoBusca) {
+        try {
+            let data;
+            if (resultadoBusca.substr(0, 2) === "tt") {
+                data = await getById(resultadoBusca);
+            } else {
+                data = await getByTitle(resultadoBusca);
+            }
+
             dispatch({
-                type: 'BUSCAR_TITLE',
-                payload: resultadoBusca,
-            })
-        }
-        
-    }
+              type: 'FETCH_DATA_SUCCESS',
+              payload: data,
+            });
+
+            goToMoviePage(navigate, data.imdbID);
+          } catch (error) {
+            dispatch({ type: 'FETCH_DATA_FAILURE', error: error.message });
+          }
+        };
+
 
     return (
         <div>
@@ -50,8 +60,6 @@ const Home = () => {
 
                     <Styled.Button onClick={onClickBusca}>Buscar</Styled.Button>
                 </Styled.Buscar>
-
-                <Movie/>
             </Styled.Container>
         </div>
 

@@ -1,34 +1,21 @@
-import { BASE_URL } from "../../constantes/url";
-import axios from "axios";
-
 const initialState = {
-    initialState: null,
+    data: null,
+    loading: false,
+    error: null
 }
 
 const dataReducer = (state = initialState, action) => {
+    
+    switch (action.type) {  
+        case 'FETCH_DATA_REQUEST':
+            return { ...state, loading: true, error: null };  
+        
+        case 'FETCH_DATA_SUCCESS':
+            return { ...state, loading: false, data: action.payload };
 
-    switch (action.type) {
-        case 'BUSCAR_ID':
-            axios.get(`${BASE_URL}i=${action.payload}`)
-                .then((res) => {
-                    state.data = {filme: res.data};
-                })
-                .catch((err) => {
-                    console.error(err);
-                    return state;
-                });
-
-
-        case 'BUSCAR_TITLE':
-            axios.get(`${BASE_URL}t=${action.payload}`)
-                .then((res) => {
-                    state.data = { filme: res.data, ... state };
-                })
-                .catch((err) => {
-                    console.error(err);
-                    return state;
-                });
-
+        case 'FETCH_DATA_FAILURE':
+            return { ...state, loading: false, error: action.error };
+    
         default:
             return state;
     }
