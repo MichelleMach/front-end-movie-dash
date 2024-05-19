@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "../pages/home"
-import MoviePage from "../pages/moviePage"
+import Movie from "../pages/movie"
 
 
 const Router = () => {
@@ -9,7 +9,7 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route index element={<Home/>} />
-                <Route path="filme/:id" element={<MoviePage/>} />
+                <Route path="movie/:id" element={<Movie/>} />
             </Routes>
         </BrowserRouter>
     )
