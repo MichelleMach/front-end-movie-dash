@@ -2,17 +2,16 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Lupa from "../assets/lupa.png"
 import * as Styled from "../styles/pages/home"
-import { useNavigate } from 'react-router-dom'
-import { goToMoviePage } from '../router/coordenator'
 import { getByTitle, getById } from '../data/getData'
-
+import LoadingPage from '../components/loading/loadingPage'
 
 const Home = () => {
 
     const [resultadoBusca, setResultadoBusca] = useState("")
+    const [goLoading, setGoLoading] = useState(false)
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+
 
     const onChangeBusca = (e) => {
         setResultadoBusca(e.target.value)
@@ -23,7 +22,9 @@ const Home = () => {
         dispatch({ type: 'FETCH_DATA_REQUEST' });
 
         try {
+
             let data;
+
             if (resultadoBusca.substr(0, 2) === "tt") {
                 data = await getById(resultadoBusca);
             } else {
@@ -31,23 +32,25 @@ const Home = () => {
             }
 
             dispatch({
-              type: 'FETCH_DATA_SUCCESS',
-              payload: data,
+                type: 'FETCH_DATA_SUCCESS',
+                payload: data,
             });
 
-            goToMoviePage(navigate, data.imdbID);
-          } catch (error) {
+        } catch (error) {
             dispatch({ type: 'FETCH_DATA_FAILURE', error: error.message });
-          }
-        };
+        }
 
+        setGoLoading(true)
+    };
 
     return (
         <div>
+            {goLoading && <LoadingPage />}
             <Styled.Container>
-                <Styled.Title>Sabe o que quer assistir?</Styled.Title>
-                <Styled.Subtitle>Procure por titulo, gênero ou ator participante.</Styled.Subtitle>
-
+                <Styled.TextDiv>
+                    <Styled.Title>Sabe o que quer assistir?</Styled.Title>
+                    <Styled.Subtitle>Procure pelo titulo ou id do filme.</Styled.Subtitle>
+                </Styled.TextDiv>
                 <Styled.Buscar>
                     <Styled.ContainerInput
                         value={resultadoBusca}
@@ -60,6 +63,7 @@ const Home = () => {
 
                     <Styled.Button onClick={onClickBusca}>Buscar</Styled.Button>
                 </Styled.Buscar>
+
             </Styled.Container>
         </div>
 

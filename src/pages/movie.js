@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import * as Styled from '../styles/components/movie';
+import React from "react";
+import * as Styled from '../styles/pages/movie';
 import { useSelector } from "react-redux";
-import ErrorMessage from "../components/error/errorMessage";
-// import containerMovie from "./containerMovie";
-import { Typography, Rating } from "@mui/material";
-
+import { Rating } from "@mui/material";
+import { useNavigate } from 'react-router-dom'
+import { goBack } from "../router/coordenator";
+import Seta from '../assets/seta_voltar.png'
 
 const Movie = () => {
 
     const dadoState = useSelector(state => state.dataReducer.data)
-    const [rating, setRating] = useState(0)
-    const [errorMessage, setErrorMessage] = useState("")
-
-    console.log(dadoState)
+    const navigate = useNavigate()
 
     const {
         Poster: imagem,
@@ -30,6 +27,11 @@ const Movie = () => {
 
     return (
         <Styled.Section>
+
+            <Styled.ButtonDiv>
+                <Styled.ImageButton src={Seta} alt={'voltar'} />
+                <Styled.Button onClick={() => goBack(navigate)}>Voltar</Styled.Button>
+            </Styled.ButtonDiv>
 
             <Styled.InfosFilme>
                 <Styled.CategoryRating>

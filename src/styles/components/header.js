@@ -9,12 +9,12 @@ export const Header = styled.header `
     justify-content: space-between;
 `
 
-export const Logo = styled.h2`
-    color: #04868B;
-    width: 20%;
-    height: auto;
-    margin: 1rem 1rem 2rem 2rem; 
-    vertical-align: baseline;
+export const Logo = styled.img`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    with: 45px;
+    height: 45px;
 `
 
 export const HeaderItens = styled.ul `
