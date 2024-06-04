@@ -2,7 +2,32 @@ import styled from "styled-components"
 
 export const Section = styled.section`
     display: flex;
+    padding-top: 15vh;
     justify-content: space-around;
+    background-color: #e73c7e;
+    height: 100vh;
+`
+
+export const ButtonDiv = styled.div`
+    display: flex;
+    position: absolute;
+    top: 90px;
+    left: 50px;
+    width: 80px;
+    align-items: center;
+
+    &:hover{
+        cursor: pointer;
+    }
+`
+
+export const ImageButton = styled.img`
+    width: 15px;
+    height: 15px;
+`
+
+export const Button = styled.p`
+    color: black;
 `
 
 export const Poster = styled.img`
@@ -30,8 +55,8 @@ export const GeneroFilme = styled.p `
     font-size: 1em;
     padding: 5px 10px;
     text-align: center;
-    color: #04868B;
-    border: 1px #04868B solid;
+    color: white;
+    border: 1px white solid;
     border-radius: 20px;
     max-width: 10em;
 `
@@ -39,17 +64,20 @@ export const GeneroFilme = styled.p `
 export const TitleFilme = styled.h2`
     font-size: 2em;
     text-align: start;
-    color: #04868B;
+    padding: 20px 0px 5px 0px;
+    color: white;
 `
 
 export const SinopseFilme = styled.p `
     font-size: 1.3em;
     text-align: start;
-    color: gray;
+    color: white;
+    padding: 0px 0px 20px 0px;
 `
 
 export const DiretorFilme = styled.p `
-    color: gray;
+    color: white;
+    padding: 0 0 5px 0;
     font-size: 1em;
     max-width: 11em; 
     max-height: 8em; 
@@ -60,7 +88,8 @@ export const DiretorFilme = styled.p `
 `
 
 export const AtoresFilme = styled.p `
-    color: gray;
+    color: white;
+    padding: 0 0 5px 0;
     font-size: 1em;
     max-width: 15em; 
     text-overflow: ellipsis;
@@ -70,6 +99,6 @@ export const AtoresFilme = styled.p `
 `
 
 export const AnoFilme = styled.p `
-    color: gray;
+    color: white;
     font-size: 1em;
 `
